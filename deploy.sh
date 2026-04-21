@@ -538,7 +538,7 @@ mkinitcpio -P
 
 # Install boot loader
 if [ "$ENCRYPTED" = "y" ]; then
-  sed -i -e "s|GRUB_CMDLINE_LINUX_DEFAULT=.*|GRUB_CMDLINE_LINUX_DEFAULT=\"cryptdevice=$PART2:root:allow-discards root=/dev/mapper/root quiet loglevel=0 net.ifnames=0 preempt=full\"|g" /etc/default/grub
+  sed -i -e "s|GRUB_CMDLINE_LINUX_DEFAULT=.*|GRUB_CMDLINE_LINUX_DEFAULT=\"cryptdevice=$PART2:root:allow-discards root=/dev/mapper/root quiet  loglevel=3 slab_nomerge pti=on page_poison=1 init_on_alloc=1 init_on_free=1 nvidia-drm.modeset=1\"|g" /etc/default/grub
   sed -i -e '/GRUB_ENABLE_CRYPTODISK=y/s/^#//g' /etc/default/grub
 else
   sed -i -e 's/GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="quiet loglevel=0 net.ifnames=0 preempt=full"/' /etc/default/grub
