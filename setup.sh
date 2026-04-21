@@ -110,9 +110,9 @@ basestrap /mnt linux-hardened linux-hardened-headers linux-firmware mkinitcpio
 fstabgen -U /mnt >/mnt/etc/fstab
 
 # Chroot
-mkdir -p /mnt/root/zartix
-cp /root/zartix/deploy.sh /mnt/root/zartix/
-chmod +x /mnt/root/zartix/deploy.sh
+mkdir -p /mnt/root/shebang-linux
+cp /root/shebang-linux/deploy.sh /mnt/root/shebang-linux/
+chmod +x /mnt/root/shebang-linux/deploy.sh
 (PART2="$PART2" ROOT_PASSWORD="$ROOT_PASSWORD" REGION_CITY="$REGION_CITY" HOST="$HOST" USERNAME="$USERNAME" KEYMAP="$KEYMAP" artix-chroot /mnt /bin/bash -c 'bash /root/shebang-linux/deploy.sh; exit')
 
 # Perform finish
