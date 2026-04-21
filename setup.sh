@@ -99,9 +99,8 @@ chmod 600 /mnt/swap/swapfile
 mkswap /mnt/swap/swapfile
 swapon /mnt/swap/swapfile
 
-# Install base system and kernel
 clear
-echo -e 'Done with configuration. Installing...'
+echo -e 'Installing base system and kernel'
 
 basestrap /mnt base runit elogind-runit efibootmgr dbus-runit grub $cpu cryptsetup-runit networkmanager networkmanager-runit
 basestrap /mnt linux-hardened linux-hardened-headers linux-firmware mkinitcpio
