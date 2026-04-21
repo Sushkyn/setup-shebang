@@ -182,7 +182,7 @@ net.core.somaxconn=65535
 net.core.optmem_max=65535
 net.core.rmem_max=6291456
 net.core.wmem_max=6291456" >/lib/sysctl.d/99-system.conf
-sysctl -w vm.compact_memory=1 && sysctl -w vm.drop_caches=3
+sysctl -w vm.drop_caches=3 || true
 
 wget -qO /etc/hosts https://github.com/StevenBlack/hosts/raw/refs/heads/master/alternates/fakenews-gambling-porn-social/hosts && sed -i -e 's/#.*0.0.0.0/0.0.0.0/g' /etc/hosts
 
