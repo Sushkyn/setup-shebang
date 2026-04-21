@@ -113,7 +113,7 @@ cp /root/setup-shebang/deploy.sh /mnt/root/setup-shebang/
 chmod +x /mnt/root/setup-shebang/deploy.sh
 (PART2="$PART2" ROOT_PASSWORD="$ROOT_PASSWORD" REGION_CITY="$REGION_CITY" HOST="$HOST" USERNAME="$USERNAME" KEYMAP="$KEYMAP" artix-chroot /mnt /bin/bash -c 'bash /root/setup-shebang/deploy.sh; exit')
 
-# Perform finish
+# she bang
 swapoff -a
 umount -AR /mnt*
 cryptsetup close "$ROOT_PART"
