@@ -200,7 +200,7 @@ cat >/etc/NetworkManager/conf.d/dns.conf <<'EOF'
 dns=default
 
 [global-dns-domain-*]
-servers=9.9.9.9,149.112.112.112
+servers=9.9.9.9;149.112.112.112
 EOF
 
 echo -e "permit nopass :$USERNAME" >/etc/doas.conf
