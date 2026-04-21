@@ -51,13 +51,34 @@ ln -s /etc/runit/sv/tor /etc/runit/runsvdir/default/
 sed -i -e 's/^HOOKS.*$/HOOKS=(base udev autodetect modconf keyboard block encrypt filesystems)/g' /etc/mkinitcpio.conf
 mkinitcpio -P
 
-
 echo -e "SocksPort 127.0.0.1:9050 IsolateClientAddr IsolateSOCKSAuth IsolateClientProtocol IsolateDestPort IsolateDestAddr
 Sandbox 1
 HardwareAccel 0
 UseEntryGuards 1
 EnforceDistinctSubnets 1
 StrictNodes 0" >>/etc/tor/torrc
+
+echo -e "CPU_LIMIT=0
+GPU_USE_SYNC_OBJECTS=1
+SHARED_MEMORY=1
+MALLOC_CONF=background_thread:true
+MALLOC_CHECK=0
+MALLOC_TRACE=0
+LD_DEBUG_OUTPUT=0
+LD_BIND_NOW=1
+LLVM_DEBUG=0
+PP_DEBUG=0
+MESA_DEBUG=0
+LIBGL_DEBUG=0
+LIBGL_NO_DRAWARRAYS=1
+LIBGL_THROTTLE_REFRESH=1
+LIBC_FORCE_NOCHECK=1
+HISTCONTROL=ignoreboth:eraseboth
+HISTSIZE=5
+LESSHISTFILE=-
+LESSHISTSIZE=0
+LESSSECURE=1
+PAGER=less" >>/etc/environment
 
 mkdir -p /etc/modprobe.d
 echo -e "blacklist pcspkr
