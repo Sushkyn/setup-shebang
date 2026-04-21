@@ -103,8 +103,7 @@ swapon /mnt/swap/swapfile
 clear
 echo -e 'Done with configuration. Installing...'
 
-basestrap /mnt base runit elogind-runit efibootmgr dbus-runit dhcpcd-runit grub $cpu wpa_supplicant-runit cryptsetup-runit
-
+basestrap /mnt base runit elogind-runit efibootmgr dbus-runit grub $cpu cryptsetup-runit networkmanager networkmanager-runit
 basestrap /mnt linux-hardened linux-hardened-headers linux-firmware mkinitcpio
 
 fstabgen -U /mnt >/mnt/etc/fstab
