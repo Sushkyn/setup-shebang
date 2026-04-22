@@ -218,6 +218,8 @@ wifi.cloned-mac-address=random
 ethernet.cloned-mac-address=random
 EOF
 
+rm -f /etc/resolv.conf
+touch /etc/resolv.conf
 chattr -i /etc/resolv.conf 2>/dev/null || true
 cat > /etc/resolv.conf <<EOF
 nameserver 9.9.9.9
