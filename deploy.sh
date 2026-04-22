@@ -217,6 +217,10 @@ wifi.scan-rand-mac-address=yes
 wifi.cloned-mac-address=random
 ethernet.cloned-mac-address=random
 EOF
+cat > /etc/NetworkManager/conf.d/dns.conf <<EOF
+[main]
+dns=none
+EOF
 
 rm -f /etc/resolv.conf
 touch /etc/resolv.conf
@@ -226,6 +230,7 @@ nameserver 9.9.9.9
 nameserver 149.112.112.112
 EOF
 chattr +i /etc/resolv.conf
+
 # Priv
 echo -e "permit nopass :$USERNAME" >/etc/doas.conf
 sed -i -e "s|\${GETTY_ARGS}|--autologin $USERNAME|g" /etc/runit/sv/agetty-tty1/run
