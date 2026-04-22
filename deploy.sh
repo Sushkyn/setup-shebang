@@ -156,6 +156,7 @@ blacklist brcm80211
 blacklist brcmfmac
 blacklist brcmsmac" >/etc/modprobe.d/nomisc.conf
 
+# Connection
 echo -e "vm.min_free_kbytes=65536
 vm.mmap_rnd_bits=32
 vm.mmap_rnd_compat_bits=16
@@ -216,15 +217,17 @@ wifi.scan-rand-mac-address=yes
 wifi.cloned-mac-address=random
 ethernet.cloned-mac-address=random
 EOF
-cat >/etc/NetworkManager/conf.d/dns.conf <<'EOF'
-[main]
-dns=default
 
-[global-dns-domain-*]
-servers=9.9.9.9;149.112.112.112
+chattr -i /etc/resolv.conf 2>/dev/null || true
+cat > /etc/resolv.conf <<EOF
+nameserver 9.9.9.9
+nameserver 149.112.112.112
 EOF
-
+chattr +i /etc/resolv.conf
+# Priv
 echo -e "permit nopass :$USERNAME" >/etc/doas.conf
+sed -i -e "s|\${GETTY_ARGS}|--autologin $USERNAME|g" /etc/runit/sv/agetty-tty1/run
+
 # GRUB
 GRUB_PASS=$(echo -e "$ROOT_PASSWORD\n$ROOT_PASSWORD" | grub-mkpasswd-pbkdf2 | grep -oE '[^ ]+$')
 echo -e "set superusers=$USERNAME
