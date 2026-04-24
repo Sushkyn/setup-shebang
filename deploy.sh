@@ -80,6 +80,40 @@ LESSHISTSIZE=0
 LESSSECURE=1
 PAGER=less" >>/etc/environment
 
+echo -e "
+/sbin/echo -n 5 | /sbin/tee /proc/sys/vm/laptop_mode
+/sbin/echo -n 1 | /sbin/tee /proc/sys/vm/compact_memory
+/sbin/echo -n 0 | /sbin/tee /proc/sys/vm/compaction_proactiveness
+/sbin/echo -n 1 | /sbin/tee /proc/sys/vm/page_lock_unfairness
+/sbin/echo -n 3 | /sbin/tee /sys/kernel/mm/lru_gen/enabled
+/sbin/echo -n 1000 | /sbin/tee /sys/kernel/mm/lru_gen/min_ttl_ms
+/sbin/echo -n auto | /sbin/tee /sys/devices/*/power/control
+/sbin/echo -n auto | /sbin/tee /sys/devices/*/*/power/control
+/sbin/echo -n auto | /sbin/tee /sys/bus/i2c/devices/*/power/control
+/sbin/echo -n auto | /sbin/tee /sys/bus/i2c/devices/*/*/power/control
+/sbin/echo -n auto | /sbin/tee /sys/bus/pci/devices/*/power/control
+/sbin/echo -n auto | /sbin/tee /sys/bus/pci/devices/*/*/power/control
+/sbin/echo -n guided | /sbin/tee /sys/devices/system/cpu/amd_pstate/status
+/sbin/echo -n guided | /sbin/tee /sys/devices/system/cpu/intel_pstate/status
+/sbin/echo -n power | /sbin/tee /sys/devices/system/cpu/cpufreq/policy*/energy_performance_preference
+/sbin/echo -n powersupersave | /sbin/tee /sys/module/pcie_aspm/parameters/policy
+/sbin/echo -n teo | /sbin/tee /sys/devices/system/cpu/cpuidle/current_governor
+/sbin/echo -n conservative | /sbin/tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+/sbin/echo -n 1 | /sbin/tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_min_freq
+/sbin/echo -n 1 | /sbin/tee /sys/devices/virtual/workqueue/cpumask
+/sbin/echo -n 1 | /sbin/tee /sys/devices/virtual/workqueue/*/cpumask
+/sbin/echo -n 2048 | /sbin/tee /sys/class/rtc/rtc0/max_user_freq
+/sbin/echo -n 2048 | /sbin/tee /proc/sys/dev/hpet/max-user-freq
+/sbin/swapon /swap/swapfile
+/sbin/mount -o noatime,nodiratime,lazytime,nosuid,nodev -t tmpfs tmpfs /tmp
+/sbin/mount -o noatime,nodiratime,lazytime,nosuid,nodev,noexec -t tmpfs tmpfs /var/tmp
+/sbin/mount -o noatime,nodiratime,lazytime,nosuid,nodev,noexec -t tmpfs tmpfs /var/cache
+/sbin/mount -o noatime,nodiratime,lazytime,nosuid,nodev,noexec -t tmpfs tmpfs /var/log
+/sbin/mount -o remount,noatime,nodiratime,lazytime,nosuid,nodev,noexec -t tmpfs shm /dev/shm
+/sbin/mount -o remount,noatime,nodiratime,lazytime,nosuid,nodev,noexec -t tmpfs cgroup /sys/fs/cgroup
+echo 1 > /sys/devices/system/cpu/intel_pstate/no_turbo" | tee /etc/rc.local
+
+
 mkdir -p /etc/modprobe.d
 echo -e "blacklist pcspkr
 blacklist snd_pcsp
