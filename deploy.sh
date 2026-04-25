@@ -40,10 +40,9 @@ Server = https://universe.artixlinux.org/\$arch
 pacman -Sy --needed --noconfirm artix-keyring artix-archlinux-support
 
 # Install base packages
-pacman -Sy --needed --noconfirm --disable-download-timeout alsa-utils backlight-runit bluez-runit dbus-broker doas egl-gbm egl-x11 fwupd gtk-engines gtk-engine-murrine haveged-runit iw jitterentropy networkmanager networkmanager-runit mesa openbox pipewire pipewire-alsa pipewire-pulse rsync tmux tor-runit torsocks unzip usbutils vim wget xdg-utils xdg-desktop-portal-gtk wireplumber xdg-user-dirs xlibre xorg-xinit xterm
+pacman -Sy --needed --noconfirm --disable-download-timeout alsa-utils bluez-runit dbus-broker doas egl-gbm egl-x11 fwupd gtk-engines gtk-engine-murrine haveged-runit iw jitterentropy networkmanager networkmanager-runit mesa openbox pipewire pipewire-alsa pipewire-pulse rsync tmux tor-runit torsocks unzip usbutils vim wget xdg-utils xdg-desktop-portal-gtk wireplumber xdg-user-dirs xlibre xorg-xinit xterm
 # Enable services
 ln -s /etc/runit/sv/NetworkManager /etc/runit/runsvdir/default/
-ln -s /etc/runit/sv/backlight /etc/runit/runsvdir/default/
 ln -s /etc/runit/sv/haveged /etc/runit/runsvdir/default/
 ln -s /etc/runit/sv/tor /etc/runit/runsvdir/default/
 
