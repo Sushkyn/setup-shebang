@@ -265,6 +265,7 @@ chattr +i /etc/resolv.conf
 # Priv
 echo -e "permit nopass :$USERNAME" >/etc/doas.conf
 sed -i -e "s|\${GETTY_ARGS}|--autologin $USERNAME|g" /etc/runit/sv/agetty-tty1/run
+rm -f /etc/runit/runsvdir/default/agetty-tty{3,4,5,6}
 
 # GRUB
 GRUB_PASS=$(echo -e "$ROOT_PASSWORD\n$ROOT_PASSWORD" | grub-mkpasswd-pbkdf2 | grep -oE '[^ ]+$')
