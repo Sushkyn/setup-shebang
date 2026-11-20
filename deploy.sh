@@ -256,7 +256,8 @@ dns=none
 EOF
 
 chattr -i /etc/resolv.conf 2>/dev/null || true
-cat > /etc/resolv.conf <<EOF
+rm -f /etc/resolv.conf
+cat > /etc/resolv.conf <<'EOF'
 nameserver 9.9.9.9
 nameserver 149.112.112.112
 EOF
